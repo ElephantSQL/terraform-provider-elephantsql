@@ -1,11 +1,11 @@
-# Terraform provider for CloudKarafka
+# Terraform provider for ElephantSQL
 
-Setup your CloudKarafka cluster with Terraform
+Setup your ElephantSQL cluster with Terraform
 
 ## Install
 
 ```sh
-git clone https://github.com/cloudkarafka/terraform-provider.git
+git clone https://github.com/elephantsql/terraform-provider.git
 cd terraform-provider
 make depupdate
 make init
