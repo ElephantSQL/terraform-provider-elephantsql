@@ -11,18 +11,18 @@ func Provider() *schema.Provider {
 			"apikey": &schema.Schema{
 				Type:        schema.TypeString,
 				Required:    true,
-				DefaultFunc: schema.EnvDefaultFunc("CLOUDKARAFKA_APIKEY", nil),
-				Description: "Key used to authentication to the CloudKarafka API",
+				DefaultFunc: schema.EnvDefaultFunc("ELEPHANTSQL_APIKEY", nil),
+				Description: "Key used to authentication to the ElephantSQL API",
 			},
 			"baseurl": &schema.Schema{
 				Type:        schema.TypeString,
-				Default:     "https://customer.cloudkarafka.com",
+				Default:     "https://customer.elephantsql.com",
 				Optional:    true,
-				Description: "Base URL to CloudKarafka website",
+				Description: "Base URL to ElephantSQL website",
 			},
 		},
 		ResourcesMap: map[string]*schema.Resource{
-			"cloudkarafka_instance": resourceInstance(),
+			"elephantsql_instance": resourceInstance(),
 		},
 		ConfigureFunc: providerConfigure,
 	}

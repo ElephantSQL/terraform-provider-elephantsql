@@ -27,38 +27,17 @@ func resourceInstance() *schema.Resource {
 				Required:    true,
 				Description: "Name of the region you want to create your instance in",
 			},
-			"vpc_subnet": {
-				Type:        schema.TypeString,
-				Optional:    true,
-				ForceNew:    true,
-				Description: "Dedicated VPC subnet, shouldn't overlap with your current VPC's subnet",
-			},
-			"ca": {
-				Type:        schema.TypeString,
-				Computed:    true,
-				Description: "Broker CA",
-			},
-			"brokers": {
-				Type:        schema.TypeString,
-				Computed:    true,
-				Description: "Comma separated list of Kafka broker urls",
-			},
-			"username": {
-				Type:        schema.TypeString,
-				Computed:    true,
-				Description: "Username for accessing the Kafka cluster",
-			},
-			"password": {
+			"url": {
 				Type:        schema.TypeString,
 				Computed:    true,
 				Sensitive:   true,
-				Description: "Password for accessing the Kafka cluster",
+				Description: "URL to the database",
 			},
 			"apikey": {
 				Type:        schema.TypeString,
 				Computed:    true,
 				Sensitive:   true,
-				Description: "API key for the CloudAMQP instance",
+				Description: "API key for the ElephantSQL instance",
 			},
 		},
 	}
@@ -66,7 +45,7 @@ func resourceInstance() *schema.Resource {
 
 func resourceCreate(d *schema.ResourceData, meta interface{}) error {
 	api := meta.(*api.API)
-	keys := []string{"name", "plan", "region", "vpc_subnet"}
+	keys := []string{"name", "plan", "region"}
 	params := make(map[string]interface{})
 	for _, k := range keys {
 		if v := d.Get(k); v != nil {

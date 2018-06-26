@@ -1,12 +1,11 @@
-provider "cloudkarafka" {}
+provider "elephantsql" {}
 
-resource "cloudkarafka_instance" "kafka_bat" {
+resource "elephantsql_instance" "sql_hippo" {
   name   = "terraform-provider-test"
-  plan   = "bat-3"
+  plan   = "hippo"
   region = "amazon-web-services::us-east-1"
-  vpc_subnet = "10.201.0.0/24"
 }
 
-output "kafka_brokers" {
-  value = "${cloudkarafka_instance.kafka_bat.brokers}"
+output "psql_url" {
+  value = "${elephantsql_instance.sql_hippo.url}"
 }
