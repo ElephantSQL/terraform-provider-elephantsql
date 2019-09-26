@@ -1,4 +1,4 @@
-package main
+package elephantsql
 
 import (
 	"github.com/84codes/go-api/api"
