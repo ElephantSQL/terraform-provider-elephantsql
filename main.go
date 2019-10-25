@@ -1,9 +1,9 @@
-package elephantsql
+package main
 
 import (
+	"github.com/elephantsql/terraform-provider-elephantsql/elephantsql"
 	"github.com/hashicorp/terraform/plugin"
 	"github.com/hashicorp/terraform/terraform"
-	"github.com/elephantsql/terraform-provider-elephantsql/elephantsql"
 )
 
 func main() {
