@@ -1,9 +1,14 @@
 package elephantsql
 
 import (
+	"fmt"
+	"log"
+
 	"github.com/84codes/go-api/api"
 	"github.com/hashicorp/terraform/helper/schema"
 )
+
+var version string
 
 func Provider() *schema.Provider {
 	return &schema.Provider{
@@ -29,5 +34,7 @@ func Provider() *schema.Provider {
 }
 
 func providerConfigure(d *schema.ResourceData) (interface{}, error) {
-	return api.New(d.Get("baseurl").(string), d.Get("apikey").(string)), nil
+	useragent := fmt.Sprintf("terraform-provider-elephantsql_v%s", version)
+	log.Printf("[DEBUG] elephantsql::provider::configure useragent: %v", useragent)
+	return api.New(d.Get("baseurl").(string), d.Get("apikey").(string), useragent), nil
 }
