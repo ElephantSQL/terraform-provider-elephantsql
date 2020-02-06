@@ -1,6 +1,7 @@
 .terraform/
 terraform.*
-terraform-provider-cloudamqp
+terraform-provider-elephantsql
 .idea/
 *.iml
 vendor/
+bin/
