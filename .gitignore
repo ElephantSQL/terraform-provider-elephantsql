@@ -1,6 +1,6 @@
 .terraform/
 terraform.*
-terraform-provider-elephantsql
+terraform-provider-elephantsql*
 .idea/
 *.iml
 vendor/
