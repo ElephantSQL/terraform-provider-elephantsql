@@ -7,8 +7,7 @@ Setup your ElephantSQL cluster with Terraform
 ```sh
 git clone https://github.com/ElephantSQL/terraform-provider-elephantsql.git
 cd terraform-provider-elephantsql
-make depupdate
-make install
+make local-install
 ```
 
 Now the provider is installed in the terraform plugins folder and ready to be used.
@@ -16,7 +15,13 @@ Now the provider is installed in the terraform plugins folder and ready to be us
 ## Example
 
 ```hcl
-provider "elephantsql" {}
+terraform {
+  required_providers {
+    elephantsql = {
+      source = "localhost/elephantsql/elephantsql"
+    }
+  }
+}
 
 resource "elephantsql_instance" "sql_hippo" {
   name   = "terraform-provider-test"
@@ -25,8 +30,16 @@ resource "elephantsql_instance" "sql_hippo" {
 }
 
 output "psql_url" {
+  sensitive = true
   value = elephantsql_instance.sql_hippo.url
 }
+```
+
+```bash
+# Create the database instance
+terraform apply -auto-approve
+# View the database URL
+terraform output -raw psql_url
 ```
 
 ## Working with HashiCorp Enterprise remote state
