@@ -4,28 +4,20 @@ PROVIDER_VERSION = 0.0.1
 
 default: build
 
-## Check if a 64 bit kernel is running
-UNAME_M := $(shell uname -m)
-
 UNAME_S := $(shell uname -s)
 ifeq ($(UNAME_S),Linux)
 	GOOS += linux
-endif
-ifeq ($(UNAME_S),Darwin)
+else ifeq ($(UNAME_S),Darwin)
 	GOOS += darwin
 endif
 
-UNAME_P := $(shell uname -p)
-ifeq ($(UNAME_P),i386)
-	ifeq ($(UNAME_M),x86_64)
-		GOARCH += amd64
-	else
-		GOARCH += i386
-	endif
-else
-	ifeq ($(UNAME_P),AMD64)
-	 GOARCH += amd64
-	endif
+UNAME_M := $(shell uname -m)
+ifeq ($(UNAME_M),x86_64)
+	GOARCH += amd64
+else ifeq ($(UNAME_M),arm64)
+	GOARCH += arm64
+else ifeq ($(UNAME_M),aarch64)
+	GOARCH += arm64
 endif
 PROVIDER_ARCH = $(GOOS)_$(GOARCH)
 
