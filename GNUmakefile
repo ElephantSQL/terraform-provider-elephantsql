@@ -1,25 +1,12 @@
-GOFMT_FILES?=$$(find . -name '*.go' |grep -v vendor)
+GOFMT_FILES?=$$(find . -name '*.go' | grep -v vendor)
 PKG_NAME=elephantsql
 PROVIDER_VERSION = 0.0.1
 
 default: build
 
-UNAME_S := $(shell uname -s)
-ifeq ($(UNAME_S),Linux)
-	GOOS += linux
-else ifeq ($(UNAME_S),Darwin)
-	GOOS += darwin
-endif
-
-UNAME_M := $(shell uname -m)
-ifeq ($(UNAME_M),x86_64)
-	GOARCH += amd64
-else ifeq ($(UNAME_M),arm64)
-	GOARCH += arm64
-else ifeq ($(UNAME_M),aarch64)
-	GOARCH += arm64
-endif
-PROVIDER_ARCH = $(GOOS)_$(GOARCH)
+GOOS := $(shell go env GOOS)
+GOARCH := $(shell go env GOARCH)
+PROVIDER_ARCH := $(GOOS)_$(GOARCH)
 
 tools:
 	GO111MODULE=on go install github.com/client9/misspell/cmd/misspell
@@ -32,9 +19,7 @@ local-clean:
 	rm -rf ~/.terraform.d/plugins/localhost/elephantsql/elephantsql/$(PROVIDER_VERSION)/$(PROVIDER_ARCH)/terraform-provider-elephantsql_v$(PROVIDER_VERSION)
 
 local-build: local-clean
-	@echo $(GOOS);
-	@echo $(GOARCH);
-	GOOS=$(GOOS) GOARCH=$(GOARCH) go build -ldflags "-X 'main.version=$(PROVIDER_VERSION)'" -o terraform-provider-elephantsql_v$(PROVIDER_VERSION)
+	go build -ldflags "-X 'main.version=$(PROVIDER_VERSION)'" -o terraform-provider-elephantsql_v$(PROVIDER_VERSION)
 
 local-install: local-build
 	mkdir -p ~/.terraform.d/plugins/localhost/elephantsql/elephantsql/$(PROVIDER_VERSION)/$(PROVIDER_ARCH)
