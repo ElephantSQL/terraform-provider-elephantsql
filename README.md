@@ -1,16 +1,6 @@
 # Terraform provider for ElephantSQL
 
-Setup your ElephantSQL cluster with Terraform
-
-## Install
-
-```sh
-git clone https://github.com/ElephantSQL/terraform-provider-elephantsql.git
-cd terraform-provider-elephantsql
-make local-install
-```
-
-Now the provider is installed in the terraform plugins folder and ready to be used.
+Setup your ElephantSQL cluster with Terraform. Create your account at https://customer.elephantsql.com/ to get an API key.
 
 ## Example
 
@@ -18,7 +8,7 @@ Now the provider is installed in the terraform plugins folder and ready to be us
 terraform {
   required_providers {
     elephantsql = {
-      source = "localhost/elephantsql/elephantsql"
+      source = "elephantsql/elephantsql"
     }
   }
 }
@@ -36,26 +26,36 @@ output "psql_url" {
 ```
 
 ```bash
+export ELEPHANTSQL_APIKEY=<your-key>
+
+terraform init
+
 # Create the database instance
 terraform apply -auto-approve
+
 # View the database URL
 terraform output -raw psql_url
 ```
 
-## Working with HashiCorp Enterprise remote state
-
-To work with HashiCorp Enterprise remote state you need to build `linux_amd64` binary and unpack it.
+## Use from source
 
 ```sh
-make release
-cd bin/release/linux/amd64
-gunzip -c /terraform-provider-elephantsql_linux_amd64.tar.gz | tar xopf -
+git clone https://github.com/ElephantSQL/terraform-provider-elephantsql.git
+cd terraform-provider-elephantsql
+make local-install
 ```
 
-You need to move it to `terraform.d/plugins/linux_64` directory (relational, inside your Terraform directory).
+You can use [`dev_overrides`](https://developer.hashicorp.com/terraform/cli/config/config-file#development-overrides-for-provider-developers) to make Terraform use your local build:
+
+```hcl
+# save as $HOME/elephantsql-provider-dev.tfrc
+provider_installation {
+  dev_overrides {
+    "elephantsql/elephantsql" = "/home/foo/terraform-provider-elephantsql"
+  }
+}
+```
+
 ```sh
-mv terraform-provider-elephantsql your_working_directory/terraform.d/plugins/linux_64
+TERRAFORM_CONFIG=$HOME/elephantsql-provider-dev.tfrc terraform apply -auto-approve
 ```
-Your cloud should be now working properly.
-
-Keep in mind it's dynamically changing, so please follow those [instructions](https://www.terraform.io/docs/cloud/run/index.html#custom-and-community-providers).
