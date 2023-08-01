@@ -5,3 +5,4 @@ terraform-provider-elephantsql*
 *.iml
 vendor/
 bin/
+dist/
