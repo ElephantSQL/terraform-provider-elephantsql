@@ -3,7 +3,7 @@ module github.com/elephantsql/terraform-provider-elephantsql
 go 1.20
 
 require (
-	github.com/84codes/go-api v1.3.2
+	github.com/84codes/go-api v1.12.2
 	github.com/hashicorp/terraform-plugin-sdk v1.17.2
 )
 
@@ -23,12 +23,12 @@ require (
 	github.com/aws/aws-sdk-go v1.44.122 // indirect
 	github.com/bgentry/go-netrc v0.0.0-20140422174119-9fd32a8b3d3d // indirect
 	github.com/bgentry/speakeasy v0.1.0 // indirect
-	github.com/dghubble/sling v1.1.0 // indirect
+	github.com/dghubble/sling v1.4.1 // indirect
 	github.com/fatih/color v1.7.0 // indirect
 	github.com/golang/groupcache v0.0.0-20210331224755-41bb18bfe9da // indirect
 	github.com/golang/protobuf v1.5.2 // indirect
 	github.com/google/go-cmp v0.5.9 // indirect
-	github.com/google/go-querystring v1.0.0 // indirect
+	github.com/google/go-querystring v1.1.0 // indirect
 	github.com/google/uuid v1.3.0 // indirect
 	github.com/googleapis/enterprise-certificate-proxy v0.2.0 // indirect
 	github.com/googleapis/gax-go/v2 v2.6.0 // indirect
