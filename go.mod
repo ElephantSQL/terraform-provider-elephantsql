@@ -1,6 +1,6 @@
 module github.com/elephantsql/terraform-provider-elephantsql
 
-go 1.13
+go 1.20
 
 require (
 	github.com/84codes/go-api v1.3.2
