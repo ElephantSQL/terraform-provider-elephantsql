@@ -89,5 +89,5 @@ func resourceUpdate(d *schema.ResourceData, meta interface{}) error {
 
 func resourceDelete(d *schema.ResourceData, meta interface{}) error {
 	api := meta.(*api.API)
-	return api.DeleteInstance(d.Id())
+	return api.DeleteInstance(d.Id(), false)
 }
