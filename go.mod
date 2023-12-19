@@ -3,7 +3,7 @@ module github.com/elephantsql/terraform-provider-elephantsql
 go 1.20
 
 require (
-	github.com/84codes/go-api v1.13.0
+	github.com/84codes/go-api v1.15.0
 	github.com/hashicorp/terraform-plugin-sdk v1.17.2
 )
 
