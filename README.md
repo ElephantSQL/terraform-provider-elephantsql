@@ -2,6 +2,9 @@
 
 Setup your ElephantSQL cluster with Terraform. Create your account at https://customer.elephantsql.com/ to get an API key.
 
+> [!WARNING]  
+> The ElephantSQL service will reach its [End of Life on January 27, 2025](https://www.elephantsql.com/blog/end-of-life-announcement.html).
+
 ## Example
 
 ```hcl
